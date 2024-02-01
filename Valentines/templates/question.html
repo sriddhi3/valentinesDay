@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="question-background">
+        <div id="content">
+            <header>
+                <h1 class="big-fonts">Be my valentine?</h1>
+                <p class="small-fonts">PLEASEEE!!</p>
+            </header>
+            <main>
+                <div class="response-buttons">
+                    <button id="noButton" onclick="moveButton()">No</button>
+                    <div id="no-image">
+                        <img src="{{ url_for('static', filename='images/angry-rhino.png') }}" alt="No Image">
+                        <p class="warn">Step away from that button!</p>
+                    </div>
+                    <button id="yesButton" onclick="yesAnswer()">Yes</button>
+                </div>
+                <p id="wrong-answer" class="hidden">Wrong answer!</p>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            var btn = document.getElementById("noButton");
+            var windowHeight = 500;
+            var windowWidth = 800;
+            var btnHeight = btn.offsetHeight;
+            var btnWidth = btn.offsetWidth;
+
+            // Calculate the maximum possible coordinates to keep the button fully visible
+            var maxTop = windowHeight - btnHeight;
+            var maxLeft = windowWidth - btnWidth;
+
+            // Calculate a random position within the constraints of the window size
+            btn.style.top = Math.max(0, Math.floor(Math.random() * maxTop)) + 'px';
+            btn.style.left = Math.max(0, Math.floor(Math.random() * maxLeft)) + 'px';
+
+            // Show "Wrong answer" text briefly
+            var wrongAnswer = document.getElementById("wrong-answer");
+            wrongAnswer.style.display = "block";
+            wrongAnswer.style.opacity = 1; // Make it fully visible
+            // Use setTimeout to hide the text after a few seconds
+            setTimeout(function() {
+                wrongAnswer.style.opacity = 0; // Begin to fade out
+                // After the fade-out transition is done, hide the element completely
+                setTimeout(function() {
+                    wrongAnswer.style.display = "none";
+                }, 500); // This timeout matches the CSS transition duration
+            }, 1000); // Keep the warning visible for 2 seconds
+        }
+
+        function yesAnswer() {
+            // Clear the content of the body
+            document.body.innerHTML = '';
+
+            // Set the background to the same image as the main page
+            document.body.style.backgroundImage = "url('{{ url_for('static', filename='images/flowers.jpg') }}')";
+
+            // Create a container for the GIFs
+            var gifsContainer = document.createElement('div');
+            gifsContainer.id = 'gifs-container';
+            gifsContainer.style.display = 'flex';
+            gifsContainer.style.justifyContent = 'center';
+            gifsContainer.style.alignItems = 'center';
+
+            // Add the first GIF
+            var gif1 = document.createElement('img');
+            gif1.src = "{{ url_for('static', filename='images/husky.gif') }}";
+            gif1.alt = "First Celebration";
+            gif1.style.width = '50%'; // Or any other styling you need
+            gifsContainer.appendChild(gif1);
+
+            // Add the second GIF
+            var gif2 = document.createElement('img');
+            gif2.src = "{{ url_for('static', filename='images/dog.gif') }}";
+            gif2.alt = "Second Celebration";
+            gif2.style.width = '40%'; // Or any other styling you need
+            gifsContainer.appendChild(gif2);
+
+            // Add the container to the body
+            document.body.appendChild(gifsContainer);
+
+            // Add the "Lesgooo" text below the GIFs
+            var wohoo = document.createElement('p');
+            wohoo.textContent = "Lesgooo, thanks for making me the luckiest man alive!";
+            wohoo.style.fontSize = '5em'; // Or any other styling you need
+            wohoo.style.textAlign = 'center';
+            wohoo.style.color = 'maroon'; // Or any other color you want
+            wohoo.style.marginTop = '20px'; // Add some space between the GIFs and the text
+            document.body.appendChild(wohoo);
+
+            // Apply additional styling to the body if needed
+            document.body.style.height = '100vh';
+            document.body.style.display = 'flex';
+            document.body.style.flexDirection = 'column';
+            document.body.style.justifyContent = 'center';
+            document.body.style.alignItems = 'center';
+        }
+    </script>
+</body>
+</html>

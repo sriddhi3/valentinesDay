@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="big-fonts">Hi there beautiful!</h1>
+    </header>
+    <main>
+        <p class="small-fonts">I have a question to ask you..</p>
+        <div class="message">
+            <p class="special-message">Look how cute we look together!</p>
+        </div>
+        <div class="curly-arrow"></div>
+        <div class="polaroid-container">
+            <img src="{{ url_for('static', filename='images/polaroid2.jpeg') }}" alt="Polaroid 2" class="polaroid" id="polaroid2">
+            <img src="{{ url_for('static', filename='images/polaroid1.jpeg') }}" alt="Polaroid 1" class="polaroid" id="polaroid1">
+        </div>
+        <button onclick="location.href='/question'">Huh??</button>
+    </main>
+    <footer>
+        <p>©Your Boo!</p>
+    </footer>
+</body>
+</html>
